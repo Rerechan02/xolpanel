@@ -6,6 +6,8 @@ apt update && apt upgrade
 apt install python3 python3-pip git
 git clone https://github.com/Rerechan02/xolpanel.git
 unzip xolpanel/xolpanel.zip
+cp -r xolpanel /usr/bin
+cd /usr/bin/xolpanel
 pip3 install -r xolpanel/requirements.txt
 pip3 install pillow
 
@@ -14,9 +16,9 @@ echo ""
 read -e -p "[*] Input your Bot Token : " bottoken
 read -e -p "[*] Input Your Id Telegram :" admin
 read -e -p "[*] Input Your Subdomain :" domain
-echo -e BOT_TOKEN='"'$bottoken'"' >> /root/xolpanel/var.txt
-echo -e ADMIN='"'$admin'"' >> /root/xolpanel/var.txt
-echo -e DOMAIN='"'$domain'"' >> /root/xolpanel/var.txt
+echo -e BOT_TOKEN='"'$bottoken'"' >> /usr/bin/xolpanel/var.txt
+echo -e ADMIN='"'$admin'"' >> /usr/bin/xolpanel/var.txt
+echo -e DOMAIN='"'$domain'"' >> /usr/bin/xolpanel/var.txt
 clear
 echo "Done"
 echo "Your Data Bot"
@@ -35,7 +37,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/root
-ExecStart=/usr/bin/python3 -m xolpanel
+ExecStart=/usr/bin/python3 -m /usr/bin/xolpanel
 Restart=always
 
 [Install]
@@ -51,6 +53,7 @@ echo -e "==============================================="
 echo " Installations complete, type /menu on your bot"
 echo -e "==============================================="
 read -n 1 -s -r -p "Press any key to Reboot"
+cd
 rm -rf xolpanel.sh
 clear
 reboot
